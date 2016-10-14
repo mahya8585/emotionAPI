@@ -1,0 +1,23 @@
+body {
+    max-width: 1000px;
+    margin: auto;
+    background-color: #F8E0E6;
+    color: #DF013A;
+}
+
+h1 {
+    font-size: 48px;
+    text-align:center;
+}
+
+.full_display {
+    width: 100%;
+}
+
+.logo {
+    width: 50%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
