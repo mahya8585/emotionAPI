@@ -1,28 +1,59 @@
 #!/usr/bin/env python
 
 import os
+from PIL import Image
 
-form_name = "photo"
-file_name = "static/img/target.jpg"
+FORM_NAME = "photo"
+FILE_NAME = "static/img/target.jpg"
+TEMPORARY_FILE_NAME = "static/img/tmp.jpg"
+MAX_PX = 4096
 
 
 def get_file(files):
-    file = files[form_name][0]["body"]
-    mime = files[form_name][0]["content_type"]
+    """
+    multipart/formで送付されたfileを取得する
+    :param files: byteファイル
+    :return: ファイルパス
+    """
+
+    file = files[FORM_NAME][0]["body"]
+    mime = files[FORM_NAME][0]["content_type"]
 
     # とりあえずjpgにだけ対応・・・
     if mime == "image/jpeg":
-        f = open(file_name, "bw")
+        f = open(FILE_NAME, "bw")
         f.write(file)
         f.close()
     else:
         print("対応していないcontent_typeです")
 
+    return FILE_NAME
+
 
 def remove_file():
-    if os.path.exists(file_name):
-        os.remove(file_name)
+    """
+    指定ファイルを削除する。
+    ここではfile_name
+    """
+    if os.path.exists(FILE_NAME):
+        os.remove(FILE_NAME)
 
 
-if __name__ == "__main__":
-    get_file()
+def resize_img():
+    """
+    max_sizeより大きいファイルは画像のリサイズを行う。
+    """
+    target = Image.open(FILE_NAME)
+    target_size = target.size
+    print(target_size)
+
+    if (target_size[0]) > MAX_PX or (target_size[1] > MAX_PX):
+        target.thumbnail((MAX_PX, MAX_PX), Image.ANTIALIAS)
+        target.save(TEMPORARY_FILE_NAME, quality=100)
+        remove_file()
+        os.rename(TEMPORARY_FILE_NAME, FILE_NAME)
+
+        print("resize, done!")
+        print(target.size)
+
+
