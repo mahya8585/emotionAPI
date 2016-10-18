@@ -7,7 +7,7 @@ def convert_from_strarray(str_array):
     :param str_array: 文字列が格納された配列
     :return: html用配列文字列
     """
-    return u"[\"" + u"\",\"".join(str_array) + u"\"]"
+    return u"[\'" + u"\',\'".join(str_array) + u"\']"
 
 
 def convert_from_intarray(int_array):
