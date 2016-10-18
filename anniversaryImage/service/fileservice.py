@@ -1,7 +1,9 @@
 #!/usr/bin/env python
 
 import os
+import requests
 from PIL import Image
+
 
 FORM_NAME = "photo"
 FILE_NAME = "static/img/target.jpg"
@@ -57,3 +59,14 @@ def resize_img():
         print(target.size)
 
 
+def get_demo_file(file_path):
+    """
+    fileを取得する
+    :param filepath イメージURL
+    :return: ファイルパス
+    """
+    img = requests.get(file_path)
+    with open(FILE_NAME, 'wb') as file:
+        file.write(img.content)
+
+    return FILE_NAME
