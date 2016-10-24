@@ -5,7 +5,7 @@ https://github.com/mahya8585/emotionAPI/blob/master/anniversaryImage/service/cog
 cognitive.pyの中のAPI KEYを書き換えてください。
 
 - endpoint
-    - /
-        - ファイルアップロード処理。設定したファイルを使ってemotion判定します
+    - /    
+        - ファイルアップロード処理。設定したファイルを使ってemotion判定します
     - /demo
         - demo用emotion判定。固定の写真を使ってemotion判定します
