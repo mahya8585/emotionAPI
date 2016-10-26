@@ -6,7 +6,7 @@ import tornado.options
 import tornado.web
 from tornado.options import define, options, parse_command_line
 
-from anniversaryImage.handler import mainhandler, uploadhandler, demohandler
+from handler import mainhandler, uploadhandler, demohandler
 
 define("port", default=8888, help="run on the given port", type=int)
 
