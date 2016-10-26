@@ -1,9 +1,12 @@
 #!/usr/bin/env python
 
 import tornado.web
-from anniversaryImage.service import fileservice
-from anniversaryImage.service import cognitive
-from anniversaryImage.service import response
+from service import fileservice
+from service import cognitive
+from service import response
+
+
+DOMAIN = "http://localhost:8888/"
 
 
 class UploadImageHandler(tornado.web.RequestHandler):
@@ -16,7 +19,7 @@ class UploadImageHandler(tornado.web.RequestHandler):
         fileservice.resize_img()
 
         # 感情チェック
-        score = cognitive.run_emotion_check(file_path)
+        score = cognitive.run_emotion_check(DOMAIN + file_path)
         no1_emotion = cognitive.get_no1_emotion_name(score)
 
         # ページ遷移
